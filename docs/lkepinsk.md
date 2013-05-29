@@ -98,7 +98,7 @@ public List<String> GetTransfersData(string htmlDocument)
 
 Import danych do bazy wykonany poprzez:
 
-```json
+```
 lukasz@ubuntu:~/Dokumenty/Studia/noSql$ mongoimport --db transfersdb --collection transfers --type csv --file ~/Dokumenty/Studia/noSql/git/data-refine/data/csv/lkepinsk-soccer-transfers.csv --headerline --ignoreBlanks
 connected to: 127.0.0.1
 Tue May 28 22:12:46.659 		Progress: 8142/168111	4%
@@ -109,14 +109,14 @@ Tue May 28 22:12:46.700 imported 2115 objects
 
 Zliczenie danych przyniosło następujący efekt: 
 
-```json
+```
 db.transfers.count()
 2115
 ```
 
 Polacy, którzy zostali transferowani za darmo między klubami:
 
-```json
+```
 db.transfers.group( { 
 key: { Player: 1, From: 1, To: 1 }
 , cond: { Price: "Free", Country: "Poland" }
@@ -143,7 +143,7 @@ key: { Player: 1, From: 1, To: 1 }
 
 Polacy transferowani za ponad 1 milion:
 
-```json
+```
 db.transfers.group( { 
 key: { Player: 1, From: 1, To: 1 }
 , cond: { Price: {$gt: 1000000}
@@ -166,7 +166,7 @@ key: { Player: 1, From: 1, To: 1 }
 
 Łączna suma pieniędzy jaką wydał klub Ajax na transfery w latach 2009-2010:
 
-```json
+```
 db.transfers.group( { 
 key: { To: 1 }
 , cond: { To: "Ajax", Years: "2009-2010" }
