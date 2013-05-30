@@ -56,7 +56,7 @@ public List<String> GetTransfersData(string htmlDocument)
 
 ## Przykładowe rekordy:
 ```json
-       {
+    {
       "Type" : "Italian Serie A",
       "Years" : "2012-2013",
       "Player" : "Thomas HeurtauxDefender",
@@ -177,6 +177,29 @@ key: { To: 1, Years: 1 }
 		result.total_money+=curr.Price;
 	} }
 , initial: { total_money: 0 } })
+[
+	{
+		"To" : "Ajax",
+		"Years" : "2012-2013",
+		"total_money" : 3000000
+	},
+	{
+		"To" : "Ajax",
+		"Years" : "2011-2012",
+		"total_money" : 0
+	},
+	{
+		"To" : "Ajax",
+		"Years" : "2009-2010",
+		"total_money" : 0
+	},
+	{
+		"To" : "Ajax",
+		"Years" : "2007-2008",
+		"total_money" : 1000000
+	}
+]
+
 ```
 
 # Wykres agregowanych danych:
