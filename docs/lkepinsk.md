@@ -165,14 +165,31 @@ key: { Player: 1, From: 1, To: 1 }
 ]
 ```
 
-Łączna suma pieniędzy jaką wydał klub Ajax na transfery w latach 2009-2010:
+Suma pieniędzy jaką wydał klub Ajax na transfery w poszczegolnych latach:
 
 ```javascript
-db.transfers.group( { 
-key: { To: 1 }
-, cond: { To: "Ajax", Years: "2009-2010" }
-, reduce: function ( curr, result ) { result.total_spent += curr.Price; }
-, initial: { total_spent: 0 } } )
+db.transfers.group({ 
+key: { To: 1, Years: 1 }
+, cond: { To: "Ajax" }
+, reduce: function ( curr, result ) { 
+	if(Number(curr.Price))
+	{ 
+		result.total_money+=curr.Price;
+	} }
+, initial: { total_money: 0 } })
 ```
+
+# Wykres agregowanych danych:
+
+Porównanie wydanych pięniędzy przez kluby z angielskiej ligi w latach 2007 - 2013.
+
+```javascript
+db.transfers.group({ 
+key: { To: 1 }
+, cond: { Type: "English Premier League", Price: {$gte: 0} }
+, reduce: function ( curr, result ) { 	if(Number(curr.Price)) { result.total_money+=curr.Price; } }
+, initial: { total_money: 0 } })
+```
+![](../images/lkepinsk/english-premier-league-diag.png)
 
 
